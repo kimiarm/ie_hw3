@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .message {
+            height: 30px;
+            background-color: #1b6d85;
+        }
+
+        .message1 {
+            height: 30px;
+            background-color: #00a67c;
+        }
+
+        .chat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            width: 25%;
+            height: 65%;
+            background-color: blue;
+            border-radius: 20px 20px 0% 0%;
+        }
+
+        .message-container {
+            flex: 4;
+            background-color: #4a148c;
+            border-radius: 20px 20px 0% 0%;
+        }
+
+        .chat-img {
+            height: 30px;
+            width: 30px;
+            border-radius: 30px;
+        }
+
+        .chat-msg {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex: 8;
+            background-color: #00bf8f
+        }
+
+        .server {
+            display: flex;
+            direction: rtl
+        }
+
+        .user {
+            display: flex;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div id="chat-box" class="chat-box">
+    <div style="flex:1 ;display:flex ;justify-content:space-around;align-items: center; background-color: blue;border-radius:20px 20px 0% 0% ;">
+        <div>
+            fdsfds
+        </div>
+        <div>
+            <img style="height: 30px ;width: 30px ;border-radius: 30px;" src="test.jpg" alt="">
+        </div>
+    </div>
+    <div id="message-container" class="message-container">
+        <br>
+        <div class="server">
+
+            <img class="chat-img" src="test.jpg" alt="">
+            &nbsp;&nbsp;&nbsp;
+            <div class="chat-msg">
+                &nbsp;sdas
+            </div>
+
+            <div class="flex-1"></div>
+        </div>
+        <br>
+        <div class="user">
+            <img class="chat-img" src="test.jpg" alt="">
+            &nbsp;&nbsp;&nbsp;
+            <div class="chat-msg">
+                &nbsp;sdas
+            </div>
+            <div class="flex-1"></div>
+        </div>
+    </div>
+</div>
+<button onclick="myFunction()">Add sender</button>
+<button onclick="myFunction()">Add reciever</button>
+<script>
+    function myFunction() {
+        var div = document.createElement('div');
+        var message = document.createElement('div');
+        var flex = document.createElement('div');
+        div.setAttribute('class', 'server');
+        message.setAttribute('class', 'chat-msg');
+        flex.setAttribute('class', 'flex-1');
+        var pic = document.createElement('img');
+
+        pic.setAttribute('class', 'chat-img');
+        pic.setAttribute('src', 'test.jpg');
+        var br = document.createElement('br');
+
+        div.appendChild(pic);
+
+        div.appendChild(message);
+
+        div.appendChild(flex);
+        document.getElementById("message-container").appendChild(br);
+        document.getElementById("message-container").appendChild(div);
+        //div.innerHTML= "fd";
+    }
+</script>
+
+
+</body>
+</html>
