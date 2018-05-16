@@ -24,20 +24,33 @@
             bottom: 0px;
             right: 0px;
             width: 25%;
-            height: 65%;
+            height: 11%;
+            background-color: blue;
+            border-radius: 20px 20px 0% 0%;
+        }
+
+        .chat-box1 {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            width: 25%;
+            height: 70%;
             background-color: blue;
             border-radius: 20px 20px 0% 0%;
         }
 
         .message-container {
-            flex: 4;
-            background-color: #4a148c;
+            flex: 8;
+            background-color: #e9e9e9;
+            overflow-y: scroll;
             border-radius: 20px 20px 0% 0%;
         }
 
         .chat-img {
-            height: 30px;
-            width: 30px;
+            height: 40px;
+            width: 40px;
             border-radius: 30px;
         }
 
@@ -45,7 +58,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            flex: 8;
+            flex: 30;
             background-color: #00bf8f
         }
 
@@ -74,8 +87,7 @@
 </head>
 <body>
 
-
-<div id="chat-box" class="chat-box">
+<div class="chat-box" id="chatDown" onclick="showUp()">
     <div style="flex:1 ;display:flex ;justify-content:space-around;align-items: center; background-color: blue;border-radius:20px 20px 0% 0% ;">
         <div>
             fdsfds
@@ -83,6 +95,31 @@
         <div>
             <img style="height: 30px ;width: 30px ;border-radius: 30px;" src="test.jpg" alt="">
         </div>
+    </div>
+</div>
+<div id="chat-box" class="chat-box1">
+    <div style="direction:rtl;flex:2 ;display:flex ;justify-content:center;align-items: center; background-color: blue;border-radius:20px 20px 0% 0% ;">
+
+        <div style="display: flex ;direction: rtl; width: 95% ; background-color: #1b6d85 ; height: 80%">
+            <div style="flex:6;display: flex ; background-color: yellow ; align-items: center">
+                <img style="height: 50px ;width: 50px" class="chat-img" src="test.jpg" alt="">
+                &nbsp;
+                &nbsp;
+                <div style="display: flex;flex-direction: column">
+                           <span>
+                               سلام
+                           </span>
+                    <span>
+                               علیک
+                           </span>
+                </div>
+            </div>
+            <div style="flex: 2 ; background-color: blueviolet"></div>
+            <div style="flex: 1; display: flex ; flex-direction: column ;align-items: flex-end ; background-color: brown">
+                <button onclick="showDown()" style="background-color: #e9e9e9 ; border-radius: 5px ; color: blue ;font-weight: bolder">_</button>
+            </div>
+        </div>
+
     </div>
     <div id="message-container" class="message-container">
         <br>
@@ -107,16 +144,37 @@
             <div class="flex-3"></div>
         </div>
     </div>
+    <div style="flex:1;display: flex ; justify-content: center ;align-items: center;background-color: #e9e9e9;border: solid 3px #d8d8d8">
+
+        <input id="msg" style="width: 95% ;height: 70%; border-radius: 10px;direction: rtl" type="text">
+
+    </div>
 </div>
 <button onclick="addSender()">Add sender</button>
-<button onclick=" addReciever()()">Add reciever</button>
+<button onclick=" addReciever()">Add reciever</button>
+<button onclick=" sendMessage()">Add reciead</button>
 <script>
+    function sendMessage() {
+        console.log(document.getElementById("msg").value);
+        addReciever() ;
+    }
+    function showUp() {
+        document.getElementById("chatDown").style.setProperty('display', 'none');
+        document.getElementById("chat-box").style.setProperty('display', 'flex');
+
+    }
+    function showDown() {
+        document.getElementById("chatDown").style.setProperty('display', 'flex');
+        document.getElementById("chat-box").style.setProperty('display', 'none');
+
+    }
     function addSender() {
         var div = document.createElement('div');
         var message = document.createElement('div');
         var space1 = document.createElement('div')
         var space2 = document.createElement('div')
-
+        var text  = document.createElement('div')
+        var date = document.createElement('div')
         div.setAttribute('class', 'server');
         message.setAttribute('class', 'chat-msg');
 
@@ -142,10 +200,15 @@
         var message = document.createElement('div');
         var space1 = document.createElement('div')
         var space2 = document.createElement('div')
-
+        var text  = document.createElement('div')
+        var date = document.createElement('div')
         div.setAttribute('class', 'user');
         message.setAttribute('class', 'chat-msg');
-
+        console.log(document.getElementById("msg").value);
+        date.innerHTML = new Date() ;
+        text.innerHTML =document.getElementById("msg").value ;
+       message.appendChild(text);
+       message.appendChild(date);
         space1.setAttribute('class', 'flex-1');
         space2.setAttribute('class', 'flex-3');
         var pic = document.createElement('img');
@@ -153,7 +216,6 @@
         pic.setAttribute('class', 'chat-img');
         pic.setAttribute('src', 'test.jpg');
         var br = document.createElement('br');
-
         div.appendChild(pic);
         div.appendChild(space1)
         div.appendChild(message);
