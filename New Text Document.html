@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        .message {
-            height: 30px;
-            background-color: #1b6d85;
-        }
+
 
         .message1 {
             height: 30px;
@@ -23,9 +22,9 @@
             position: fixed;
             bottom: 0px;
             right: 0px;
-            width: 25%;
-            height: 11%;
-            background-color: blue;
+            width: 20%;
+            height: 9%;
+            background-color: #4057f0;
             border-radius: 20px 20px 0% 0%;
         }
 
@@ -37,7 +36,7 @@
             right: 0px;
             width: 25%;
             height: 70%;
-            background-color: blue;
+            background-color: #4057f0;
             border-radius: 20px 20px 0% 0%;
         }
 
@@ -59,7 +58,7 @@
             flex-direction: column;
             justify-content: space-around;
             flex: 30;
-            background-color: #00bf8f
+            background-color: white;
         }
 
         .server {
@@ -88,35 +87,41 @@
 <body>
 
 <div class="chat-box" id="chatDown" onclick="showUp()">
-    <div style="flex:1 ;display:flex ;justify-content:space-around;align-items: center; background-color: blue;border-radius:20px 20px 0% 0% ;">
+    <div style="font-size:25px ;color:white ;flex:1 ;display:flex ;justify-content:center;align-items: center; background-color: #4057f0;border-radius:20px 20px 0% 0% ;">
         <div>
-            fdsfds
+            پشتیبانی آنلاین
         </div>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
         <div>
-            <img style="height: 30px ;width: 30px ;border-radius: 30px;" src="test.jpg" alt="">
+            <img style="height: 40px ;width: 40px ;border-radius: 30px;" src="icon.png" alt="">
         </div>
     </div>
 </div>
 <div id="chat-box" class="chat-box1">
-    <div style="direction:rtl;flex:2 ;display:flex ;justify-content:center;align-items: center; background-color: blue;border-radius:20px 20px 0% 0% ;">
+    <div style="direction:rtl;flex:2 ;display:flex ;justify-content:center;align-items: center; background-color:#4057f0;border-radius:20px 20px 0% 0% ;">
 
-        <div style="display: flex ;direction: rtl; width: 95% ; background-color: #1b6d85 ; height: 80%">
-            <div style="flex:6;display: flex ; background-color: yellow ; align-items: center">
-                <img style="height: 50px ;width: 50px" class="chat-img" src="test.jpg" alt="">
+        <div style="display: flex ;direction: rtl; width: 95% ; height: 80%">
+            <div style="flex:6;display: flex ; align-items: center">
+                <img id="support" style="height: 50px ;width: 50px" class="chat-img" src="" alt="">
                 &nbsp;
                 &nbsp;
                 <div style="display: flex;flex-direction: column">
                            <span>
-                               سلام
+                               پشتیبان بخش فروش
                            </span>
-                    <span>
-                               علیک
+                    <span id="name">
+
                            </span>
                 </div>
             </div>
-            <div style="flex: 2 ; background-color: blueviolet"></div>
-            <div style="flex: 1; display: flex ; flex-direction: column ;align-items: flex-end ; background-color: brown">
-                <button onclick="showDown()" style="background-color: #e9e9e9 ; border-radius: 5px ; color: blue ;font-weight: bolder">_</button>
+            <div style="flex: 2 ;"></div>
+            <div style="flex: 1; display: flex ; flex-direction: column ;align-items: flex-end ; ">
+                <button onclick="showDown()"
+                        style="background-color: #e9e9e9 ; border-radius: 5px ; color: #4057f0 ;font-weight: bolder">_
+                </button>
             </div>
         </div>
 
@@ -125,24 +130,16 @@
         <br>
         <div class="server">
 
-            <img class="chat-img" src="test.jpg" alt="">
+            <img id="firstPic" class="chat-img" src="" alt="">
             <div class="flex-1"></div>
-            <div class="chat-msg">
+            <div id="firstMsg" class="chat-msg">
 
             </div>
 
             <div class="flex-3"></div>
         </div>
-        <br>
-        <div class="user">
-            <img class="chat-img" src="test.jpg" alt="">
-            <div class="flex-1"></div>
-            <div class="chat-msg">
 
-            </div>
 
-            <div class="flex-3"></div>
-        </div>
     </div>
     <div style="flex:1;display: flex ; justify-content: center ;align-items: center;background-color: #e9e9e9;border: solid 3px #d8d8d8">
 
@@ -153,62 +150,136 @@
 <button onclick="addSender()">Add sender</button>
 <button onclick=" addReciever()">Add reciever</button>
 <button onclick=" sendMessage()">Add reciead</button>
+<button onclick=" getAxios()">get</button>
+<button onclick=" fetch()">fetch</button>
 <script>
+    clicked = 0  ;
+    function fetch() {
+        axios.get('http://51.15.59.130:46260/fetch')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    function getAxios() {
+        axios.get('http://51.15.59.130:46260/support')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     function sendMessage() {
         console.log(document.getElementById("msg").value);
-        addReciever() ;
+        addReciever();
     }
+    last = '';
+    first = '' ;
+    ax = '' ;
     function showUp() {
+
         document.getElementById("chatDown").style.setProperty('display', 'none');
         document.getElementById("chat-box").style.setProperty('display', 'flex');
+        if(clicked == 0 ) {
+            clicked = 1 ;
+            axios.get('http://51.15.59.130:46260/support')
+                .then(function (response) {
+                    console.log(response)
+                    ax = response.data.support.picture ;
+                     first =response.data.support.first ;
+                     last = response.data.support.last ;
+                    document.getElementById("support").setAttribute("src", response.data.support.picture)
+                    document.getElementById("firstPic").setAttribute("src", response.data.support.picture)
+                    document.getElementById("name").innerHTML = response.data.support.first + " " + response.data.support.last
+                    axios.get('http://51.15.59.130:46260/fetch')
+                        .then(function (response) {
+                            console.log(response);
+                            document.getElementById("firstMsg").innerHTML = "&nbsp&nbsp&nbsp" + response.data.responses[0].message;
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
     function showDown() {
         document.getElementById("chatDown").style.setProperty('display', 'flex');
         document.getElementById("chat-box").style.setProperty('display', 'none');
 
     }
+    var m ;
+    msg = "" ;
     function addSender() {
-        var div = document.createElement('div');
-        var message = document.createElement('div');
-        var space1 = document.createElement('div')
-        var space2 = document.createElement('div')
-        var text  = document.createElement('div')
-        var date = document.createElement('div')
-        div.setAttribute('class', 'server');
-        message.setAttribute('class', 'chat-msg');
 
-        space1.setAttribute('class', 'flex-1');
-        space2.setAttribute('class', 'flex-3');
-        var pic = document.createElement('img');
+        axios.get('http://51.15.59.130:46260/fetch')
+            .then(function (response) {
+                console.log(response);
+                msg = response.data.responses[0].message;
+                console.log(msg)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+       // console.log(messages)
+        setInterval(function() {
+            axios.get('http://51.15.59.130:46260/fetch')
+                .then(function (response) {
+                    console.log(response);
+                    msg = response.data.responses[0].message;
+                    console.log(msg)
+                    var div = document.createElement('div');
+                    var message = document.createElement('div');
+                    var space1 = document.createElement('div')
+                    var space2 = document.createElement('div')
+                    var text = document.createElement('div')
+                    var date = document.createElement('div')
+                    div.setAttribute('class', 'server');
+                    message.setAttribute('class', 'chat-msg');
 
-        pic.setAttribute('class', 'chat-img');
-        pic.setAttribute('src', 'test.jpg');
-        var br = document.createElement('br');
+                    space1.setAttribute('class', 'flex-1');
+                    space2.setAttribute('class', 'flex-3');
+                    var pic = document.createElement('img');
+                    text.innerHTML ="&nbsp&nbsp&nbsp" + msg ;
+                    pic.setAttribute('class', 'chat-img');
+                    pic.setAttribute('src', ax);
+                    var br = document.createElement('br');
+                    message.appendChild(text);
+                    div.appendChild(pic);
+                    div.appendChild(space1)
+                    div.appendChild(message);
 
-        div.appendChild(pic);
-        div.appendChild(space1)
-        div.appendChild(message);
+                    div.appendChild(space2);
+                    document.getElementById("message-container").appendChild(br);
+                    document.getElementById("message-container").appendChild(div);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }, 5000);
 
-        div.appendChild(space2);
-        document.getElementById("message-container").appendChild(br);
-        document.getElementById("message-container").appendChild(div);
-        //div.innerHTML= "fd";
     }
     function addReciever() {
+
         var div = document.createElement('div');
         var message = document.createElement('div');
         var space1 = document.createElement('div')
         var space2 = document.createElement('div')
-        var text  = document.createElement('div')
+        var text = document.createElement('div')
         var date = document.createElement('div')
         div.setAttribute('class', 'user');
         message.setAttribute('class', 'chat-msg');
         console.log(document.getElementById("msg").value);
-        date.innerHTML = new Date() ;
-        text.innerHTML =document.getElementById("msg").value ;
-       message.appendChild(text);
-       message.appendChild(date);
+        date.innerHTML = new Date();
+        text.innerHTML = document.getElementById("msg").value;
+        message.appendChild(text);
+        message.appendChild(date);
         space1.setAttribute('class', 'flex-1');
         space2.setAttribute('class', 'flex-3');
         var pic = document.createElement('img');
@@ -224,6 +295,15 @@
         document.getElementById("message-container").appendChild(br);
         document.getElementById("message-container").appendChild(div);
         //div.innerHTML= "fd";
+        axios.post('http://51.15.59.130:46260/send', {
+            message : document.getElementById("msg").value
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 </script>
 
